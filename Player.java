@@ -4,9 +4,15 @@ import java.util.List;
 public class Player {
     private List<Card> hand;
     private int totalHandValue;
+    private int id;
 
-    public Player() {
-        hand = new ArrayList<>();
+    public Player(int id) {
+        this.hand = new ArrayList<>();
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public void addCardToHand(Card card) {
