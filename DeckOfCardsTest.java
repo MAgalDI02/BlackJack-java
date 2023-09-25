@@ -73,7 +73,7 @@ public class DeckOfCardsTest {
                 System.out.printf("\n Vez do jogador %d !\n", count);
                 displayPlayerHand(player, null);
 
-                // Pergunte ao jogador se deseja comprar mais uma carta
+                // Pergunte ao jogador se deseja comprar mais uma cartas
                 System.out.print("\n Deseja comprar mais uma carta? (S/N): ");
                 choice = scanner.nextLine().toUpperCase();
                 while (choice.equals("S")) {
@@ -106,25 +106,15 @@ public class DeckOfCardsTest {
 
             int dealerHandValue = displayDealerHand(dealerHand, false, true); // Exibir a primeira carta do dealer
 
-            if (dealerHandValue > 21) {
-                System.out.println("Dealer passou de 21. Está fora.");
-
+            if (dealerHandValue <= 21 && winnerPlayer != null) {
                 if (isDraw) {
-                    System.out.println("Houve um empate entre os players.");
-                }
-                else {
-                    System.out.println("\n O vencedor é o Player " + winnerPlayer.getId() + ". Parabéns!!!");
-                }
-            }
-            else {
-                if (isDraw) {
-                    System.out.println("Houve um empate entre os players.");
+                    System.out.println("\n Houve um empate entre os players.");
 
                     if (winnerPlayer.getTotalHandValue() > dealerHandValue){
-                        System.out.println("Ambos ganharam, pois o valor é superior ao do delaer.");
+                        System.out.println(" Ambos ganharam, pois o valor é superior ao do dealer.");
                     }
                     else {
-                        System.out.println("O Dealer ganhou. :/");
+                        System.out.println("\n O Dealer ganhou! :P");
                     }
                 }
                 else {
@@ -132,8 +122,28 @@ public class DeckOfCardsTest {
                     System.out.println("\n O vencedor é o Player " + winnerPlayer.getId() + ". Parabéns!!!");
                    }
                    else {
-                    System.out.println("O Dealer ganhou. :P");
+                    System.out.println(" O Dealer ganhou! :P");
                    }
+                }
+            }
+
+            else {
+                
+                if (winnerPlayer == null){
+                    System.out.println("\n Ambos jogadores perderam. :/");
+                    if(dealerHandValue < 21){
+                         System.out.println(" Dealer ganhou esta rodada!");
+                    } else{
+                        System.out.println(" Dealer passou de 21. Está fora.");
+                        System.out.println(" Não houve vencedores nesta rodada!");
+                    }
+                   
+                }
+                else if (isDraw) {
+                    System.out.println(" Houve um empate entre os players.");
+                }
+                else {
+                    System.out.println("\n O vencedor é o Player " + winnerPlayer.getId() + ". Parabéns!!!");
                 }
             }
 
