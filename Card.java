@@ -21,7 +21,7 @@ public class Card {
             return asValue;
         }
 // caso não seja Ás e seja maior que 10
-        else if (value > 10) {
+        else if (value > 10 && value != 11) {
             return 10;  // Valor das cartas de 10 a 13 (rei, rainha, valete) é 10.
         }
         

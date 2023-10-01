@@ -124,10 +124,9 @@ public class DeckOfCardsTest {
                 }
 // caso não haja um empate
                 else {
-                   if (winnerPlayer.getTotalHandValue() > dealerHandValue){
+                   if(winnerPlayer.getTotalHandValue() > dealerHandValue){
                     System.out.println("\n O vencedor é o Player " + winnerPlayer.getId() + ". Parabéns!!!");
-                   }
-                   else {
+                   } else if(winnerPlayer.getTotalHandValue() < dealerHandValue) {
                     System.out.println(" O Dealer ganhou! :P");
                    }
                 }
@@ -177,8 +176,8 @@ public class DeckOfCardsTest {
 // mostra todas as cartas da mão do dealer e calcula o valor total de sua mão
         } else if (showAllCards) {
             System.out.println("\n Carta oculta do dealer é: " + dealerHand.get(1));
-            int dealerTotal = dealerHand.get(0).getValue() + dealerHand.get(1).getValue();
-            System.out.println(" Mão do Dealer: [" + dealerHand.get(0).getValue() +"," + dealerHand.get(1).getValue() + "]\n Total do Dealer é: " + dealerTotal);
+            int dealerTotal = dealerHand.get(0).getCustomValue() + dealerHand.get(1).getCustomValue();
+            System.out.println(" Mão do Dealer: [" + dealerHand.get(0) +", " + dealerHand.get(1) + "]\n Total do Dealer é: " + dealerTotal);
             return dealerTotal;
 // apenas printa as cartas do dealer
         } else {
