@@ -24,7 +24,7 @@ public class DeckOfCardsTest {
             List<Card> dealerHand = new ArrayList<>();
             dealerHand.add(deck.drawCard());
             dealerHand.add(deck.drawCard());
-
+// mostra as regras do jogo BlackJack
             System.out.println("Bem-vindo ao Blackjack!");
             System.out.println("\n                 ~~ REGRAS DO JOGO BLACKJACK ~~ \n");
             System.out.println("1. Objetivo:");
@@ -68,7 +68,8 @@ public class DeckOfCardsTest {
             int count = 1;
 
             displayDealerHand(dealerHand, true, false);
-
+// faz um loop para que todos os jogadores sejam utilizados, mostrando suas duas cartas iniciais 
+// e se caso o jogador queira comprar mais uma carta para aumentar o valor de sua mão
             for (Player player : players) {
                 System.out.printf("\n Vez do jogador %d !\n", count);
                 displayPlayerHand(player, null);
@@ -79,8 +80,10 @@ public class DeckOfCardsTest {
                 while (choice.equals("S")) {
                     Card newCard = deck.drawCard();
                     player.addCardToHand(newCard);
+// mostra a carta que foi comprada
                     System.out.println("\n Você comprou: " + newCard);
                     displayPlayerHand(player, newCard);
+// valor da mão maior que 21
                     if (player.getTotalHandValue() > 21) {
                         System.out.println("\n Você PERDEU! Sua pontuação é maior que 21.");
                         break;
@@ -95,18 +98,20 @@ public class DeckOfCardsTest {
             int winnerValue = 0;
             boolean isDraw = false;
             for (Player player : players) {
-                // Primeiro jogador tem mao até 21
+                // compara as cartas dos jogadores para saber qual mão tem o maior valor
                 if (player.getTotalHandValue() > winnerValue && player.getTotalHandValue() <= 21) {
                     winnerPlayer = player;
                     winnerValue += player.getTotalHandValue();
+            // caso o valor da mão dos jogadores forem identicos, há um empate.
                 } else if (player.getTotalHandValue() == winnerValue && player.getTotalHandValue() <= 21) {
                     isDraw = true;
                 }
             }
-
+// mão do dealer para efetuar a comparação com a mão do jogador de maior valor
             int dealerHandValue = displayDealerHand(dealerHand, false, true); // Exibir a primeira carta do dealer
-
+// dealer tem mão menor que 21 e os jogadores possuem valores em suas mãos
             if (dealerHandValue <= 21 && winnerPlayer != null) {
+// caso ocorra um empate
                 if (isDraw) {
                     System.out.println("\n Houve um empate entre os players.");
 
@@ -117,6 +122,7 @@ public class DeckOfCardsTest {
                         System.out.println("\n O Dealer ganhou! :P");
                     }
                 }
+// caso não haja um empate
                 else {
                    if (winnerPlayer.getTotalHandValue() > dealerHandValue){
                     System.out.println("\n O vencedor é o Player " + winnerPlayer.getId() + ". Parabéns!!!");
@@ -126,7 +132,7 @@ public class DeckOfCardsTest {
                    }
                 }
             }
-
+// se a mão do dealer estourou e os jogadores não possuem valores em suas mãos(ou estouraram suas mãos)
             else {
                 
                 if (winnerPlayer == null){
@@ -156,23 +162,25 @@ public class DeckOfCardsTest {
         System.out.println("\n Obrigado por jogar!");
         scanner.close();
     }
-
+// mostra a mão do jogador e automaticamente calcula seu valor total
     public static void displayPlayerHand(Player player, Card cardBought) {
         System.out.println(" Mão do jogador: " + player.getHand());
         System.out.println(" Total da mão do jogador: " + player.calculateHandValue(cardBought));
     }
-
+// método de amostragem do dealer e suas cartas e valor de sua mão
     public static int displayDealerHand(List<Card> dealerHand, boolean showFirstCard, boolean showAllCards) {
-        
+// apenas mostra a primeira carta         
         if (showFirstCard) {
             System.out.print("\n Mão do dealer: ");
             System.out.println(dealerHand.get(0) + " e uma carta oculta.");
             return 0;
+// mostra todas as cartas da mão do dealer e calcula o valor total de sua mão
         } else if (showAllCards) {
             System.out.println("\n Carta oculta do dealer é: " + dealerHand.get(1));
             int dealerTotal = dealerHand.get(0).getValue() + dealerHand.get(1).getValue();
             System.out.println(" Mão do Dealer: [" + dealerHand.get(0).getValue() +"," + dealerHand.get(1).getValue() + "]\n Total do Dealer é: " + dealerTotal);
             return dealerTotal;
+// apenas printa as cartas do dealer
         } else {
             System.out.println(dealerHand);
             return 0;

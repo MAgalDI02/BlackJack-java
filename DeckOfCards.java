@@ -8,7 +8,7 @@ public class DeckOfCards {
         deck = new ArrayList<>();
         initializeDeck();
     }
-
+// inicializa o deck com as 14 cartas possíveis
     private void initializeDeck() {
         for (int i = 0; i < 4; i++) {
             for (int j = 2; j <= 14; j++) {
@@ -16,7 +16,7 @@ public class DeckOfCards {
             }
         }
     }
-
+// distribui as cartas aleatóriamente para os jogadores
     public Card drawCard() {
         if (deck.isEmpty()) {
             return null;
